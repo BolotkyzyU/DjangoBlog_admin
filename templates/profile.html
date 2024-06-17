@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    {% include 'include/header.html' %}
+      <!-- Alert -->
+      <div class="alert alert-secondary" role="alert">
+        A simple primary alert—check it out!
+      </div>
+      <!-- Alert end -->
+      <!-- Profile Area Start  -->
+      <div class="container">
+          <div class="row">
+            <h2>Профиль</h2>
+            {% if user.profile_image %}
+            <img src="{{ user.profile_image.url }}" alt="" style = "width: 300px;">
+            {% else %}
+            <img src="https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482930.jpg" alt="" style = "width: 300px;">
+            {% endif %}
+            <h3>Имя пользователя: {{ user.username }}</h3>
+            <h3>Имя: {{ user.last_name }}</h3>
+            <h3>Фамилия: {{ user.first_name }}</h3>
+            <h3>Дата рождения: {{ user.date_of_birth }}</h3>
+            <h3>Телефонный номер: {{ user.tel }}</h3>
+            <a href="{% url 'update_profile' user.id %}"><button class = "btn btn-outline-success">Обновить</button></a>
+            <a href="{% url 'delete_profile' user.id %}" style="margin-top: 10px;"><button class = "btn btn-outline-danger">Удалить</button></a>
+          </div>
+      </div>
+      
+      <!-- Profile Area End -->
+      {% include 'include/footer.html' %}
+      <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>

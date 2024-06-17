@@ -15,13 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from posts.views import index
+from posts.views import index, post_detail, post_create, post_update, post_delete, post_search
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LogoutView
+from users.views import register, user_login, profile, update_profile, delete_profile
 
 
 urlpatterns = [
-    path('',index),
+    path('', index, name = "index"),
+    path('post/<int:id>', post_detail, name = "post_detail"),
+    path('post/create', post_create, name = "post_create"),
+    path('post/update/<int:id>', post_update, name = "post_update"),
+    path('post/delete/<int:id>', post_delete, name = "post_delete"),
+    path('register/', register, name = "register"),
+    path('login/', user_login, name = "login"),
+    path('user/<int:id>', profile, name = "profile"),
+    path('user/update/<int:id>', update_profile, name ="update_profile"),
+    path('user/delete/<int:id>', delete_profile, name = "delete_profile"),
+    path('search/', post_search, name = "post_search"),
+    path('logout/', LogoutView.as_view(next_page = 'index'), name = "logout"),
     path('admin/', admin.site.urls),
 ]
 
